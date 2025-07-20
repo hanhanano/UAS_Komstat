@@ -40,8 +40,8 @@ ui <- dashboardPage(
       menuItem("Statistik Inferensia", tabName = "inferensia", icon = icon("flask")),
       menuItem("Regresi Linear Berganda", tabName = "regresi", icon = icon("chart-line")),
       br(),
-      actionButton("printAllTabs", "🖨️ Cetak Semua Tab")
-
+      actionButton("printAllTabs", label = ("Cetak Semua Tab")
+      )
     )
   ),
   dashboardBody(
@@ -57,6 +57,40 @@ ui <- dashboardPage(
         --dark-gray: #7f8c8d;
         --white: #ffffff;
         --shadow-medium: rgba(0, 0, 0, 0.12);
+      }
+
+      .main-sidebar {
+        position: fixed;
+        height: 100%;
+        overflow-y: auto;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+      }
+
+      .content-wrapper, .main-footer {
+        margin-left: 230px;
+      }
+
+      #printAllTabs {
+        background-color: #3F5973;
+        color: #ecf0f1;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        transition: background-color 0.3s ease;
+        margin: 15px 0 15px 15px;
+      }
+
+      #printAllTabs:hover,
+      #printAllTabs:focus {
+        background-color: #16a085 !important;
+        color: white !important;
+        cursor: pointer;
+        box-shadow: 0 2px 6px var(--white) !important;
       }
 
       /* Main layout */
