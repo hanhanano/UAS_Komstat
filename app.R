@@ -85,6 +85,23 @@ ui <- dashboardPage(
         box-shadow: 2px 0 8px var(--shadow-medium);
       }
 
+      .stat-card {
+        margin-bottom: 12px;
+      }
+
+      .equal-height-row {
+        display: flex;
+      }
+
+      .equal-height-row .shiny-html-output,
+      .equal-height-row .box,
+      .equal-height-row .upload-card {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+}
+
+
       /* Full Download */
       @media print {
         .tab-content > .tab-pane {
@@ -550,6 +567,7 @@ ui <- dashboardPage(
                 )
               ),
               fluidRow(
+                class = "equal-height-row",
                 style = "margin-bottom: 30px;",
                 column(4,
                        div(class = "upload-card",
@@ -605,7 +623,7 @@ ui <- dashboardPage(
                                icon("project-diagram", class = "fa-lg", style = "color: #27ae60; margin-right: 10px;"),
                                div(
                                  h4("Data MDS (Optional)", style = "color: #2c3e50; font-weight: 600; margin: 0; font-size: 1.2em;"),
-                                 p("Matrix distance (Masih belum ada implementasinya dalam dashboard ini)", style = "color: #7f8c8d; font-size: 13px; margin: 5px 0 0 0;")
+                                 p("Matrix distance", style = "color: #7f8c8d; font-size: 13px; margin: 5px 0 0 0;")
                                )
                            ),
 
@@ -631,7 +649,8 @@ ui <- dashboardPage(
                                        )
                                    )
                                )
-                           )
+                           ),
+                           p("*Masih belum ada implementasinya dalam dashboard ini", style = "color: #FF1E27; font-weight: bold; font-size: 13px; margin: 5px 0 0 0;")
                        )
                 ),
 
