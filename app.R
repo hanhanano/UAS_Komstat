@@ -808,7 +808,7 @@ ui <- dashboardPage(
                                       style = "color: #2c3e50; font-weight: 600; margin: 0; font-size: 1.4em;")
                                ),
                                downloadButton("downloadData",
-                                              list(icon("download"), " Unduh Data Terproses"),
+                                              list(" Unduh Data Terproses"),
                                               class = "btn-success",
                                               style = "background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); border: none; color: white; padding: 10px 20px; border-radius: 6px; font-weight: 600; box-shadow: 0 3px 10px rgba(39,174,96,0.3);"
                                )
