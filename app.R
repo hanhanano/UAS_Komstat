@@ -38,7 +38,10 @@ ui <- dashboardPage(
       menuItem("Uji Asumsi Data", tabName = "asumsi", icon = icon("flask")),
       menuItem("Resampling", tabName = "resampling", icon = icon("random")),
       menuItem("Statistik Inferensia", tabName = "inferensia", icon = icon("flask")),
-      menuItem("Regresi Linear Berganda", tabName = "regresi", icon = icon("chart-line"))
+      menuItem("Regresi Linear Berganda", tabName = "regresi", icon = icon("chart-line")),
+      br(),
+      actionButton("printAllTabs", "🖨️ Cetak Semua Tab")
+
     )
   ),
   dashboardBody(
@@ -81,8 +84,29 @@ ui <- dashboardPage(
         background-color: var(--secondary-color) !important;
         box-shadow: 2px 0 8px var(--shadow-medium);
       }
+
+      /* Full Download */
+      @media print {
+        .tab-content > .tab-pane {
+          display: block !important;
+          height: auto !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+          position: relative !important;
+        }
+      }
+
     "))
     ),
+
+    tags$script(HTML("
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('printAllTabs').onclick = function() {
+          window.print();
+        };
+      });
+    ")),
+
     tabItems(
       tabItem(tabName = "beranda",
               fluidRow(
@@ -6275,6 +6299,8 @@ server <- function(input, output, session) {
       file.copy(temp_file, file, overwrite = TRUE)
     }
   )
+
+
 }
 
 shinyApp(ui, server)
