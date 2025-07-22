@@ -1,0 +1,13 @@
+name: uas_komstat
+title: uas_komstat
+username: komstat-12
+account: komstat-12
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15108839
+bundleId: 10655603
+url: https://komstat-12.shinyapps.io/uas_komstat/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Laporan/2KS2_222313332_Raihan Taufiqurrahman Zaki_UAS.docx|Laporan/Pakta Integritas UAS Komputasi Statistik.docx

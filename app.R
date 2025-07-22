@@ -21,11 +21,7 @@ library(tseries)
 library(moments)
 library(boot)
 library(rsconnect)
-#rsconnect::setAccountInfo(
-#name='Clear-IN',
-#token='F0304BDDB9AE2B005EEC8D127CAC3DE5',
-#secret='PcMly6f1VnMMO0jlAAXGicsoshAS8MELeFXoVwt0'
-#)
+rsconnect::setAccountInfo(name='komstat-12', token='F0304BDDB9AE2B005EEC8D127CAC3DE5', secret='PcMly6f1VnMMO0jlAAXGicsoshAS8MELeFXoVwt0')
 #writeManifest() sekali aja dipanggil
 
 ui <- dashboardPage(
