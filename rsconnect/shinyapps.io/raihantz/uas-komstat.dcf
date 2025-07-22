@@ -5,7 +5,7 @@ account: raihantz
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 15108875
-bundleId: 10655645
+bundleId: 10657406
 url: https://raihantz.shinyapps.io/uas-komstat/
 version: 1
 asMultiple: FALSE

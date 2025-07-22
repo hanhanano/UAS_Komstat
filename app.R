@@ -19,7 +19,6 @@ library(flextable)
 library(nortest)
 library(tseries)
 library(moments)
-library(boot)
 library(rsconnect)
 rsconnect::setAccountInfo(name='raihantz', token='76911D6F934E1E4CFDE0C7F205B0D41F', secret='jaSuQSLVL95PIefVJ5ETs9Nk96jp5lcvVOS+of0d')
 #writeManifest() sekali aja dipanggil
@@ -215,9 +214,9 @@ ui <- dashboardPage(
                                     box-shadow: 0 4px 20px rgba(0,0,0,0.1);",
                            h1("Clear - IN",
                               style = "font-size: 2.75em; font-weight: 400; margin: 0; letter-spacing: 0.5px;"),
-                           h2("Comprehensive Laboratory for Exploratory Analysis & Research — Inferensia",
+                           h2("Comprehensive Local Exploratory Analysis and Reporting Interface for Indonesia",
                               style = "font-size: 1.5em; font-weight: 300; margin-bottom: 10px; letter-spacing: 1px;"),
-                           h4("(Platform Komprehensif untuk Analisis Statistik dengan Metode Resampling)",
+                           h4("(Platform analisis statistik terintegrasi untuk data kerentanan sosial di tingkat kabupaten/kota seluruh Indonesia)",
                               style = "font-weight: 300; opacity: 0.9; margin-bottom: 0;")
                        )
                 )
@@ -357,63 +356,63 @@ ui <- dashboardPage(
                     }
 
                     .metadata-container {
-                            background: white;
-                            border-radius: 15px;
-                            padding: 30px;
-                            margin-bottom: 20px;
-                            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-                            border-top: 4px solid #17a2b8;
-                        }
+                      background: white;
+                      border-radius: 15px;
+                      padding: 30px;
+                      margin-bottom: 20px;
+                      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                      border-top: 4px solid #17a2b8;
+                    }
 
-                        .metadata-title {
-                            color: #2c3e50;
-                            font-weight: 600;
-                            font-size: 2em;
-                            text-align: center;
-                            margin-bottom: 30px;
-                        }
+                    .metadata-title {
+                      color: #2c3e50;
+                      font-weight: 600;
+                      font-size: 2em;
+                      text-align: center;
+                      margin-bottom: 30px;
+                    }
 
-                        .variable-card {
-                            background: rgba(255,255,255,0.95);
-                            border-radius: 12px;
-                            padding: 20px;
-                            margin-bottom: 20px;
-                            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-                            transition: transform 0.3s ease, box-shadow 0.3s ease;
-                            height: 160px;
-                            border-left: 4px solid #3498db;
-                        }
+                    .variable-card {
+                      background: rgba(255,255,255,0.95);
+                      border-radius: 12px;
+                      padding: 20px;
+                      margin-bottom: 20px;
+                      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                      transition: transform 0.3s ease, box-shadow 0.3s ease;
+                      height: 160px;
+                      border-left: 4px solid #3498db;
+                    }
 
-                        .variable-card:hover {
-                            transform: translateY(-5px);
-                            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-                        }
+                    .variable-card:hover {
+                      transform: translateY(-5px);
+                      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+                    }
 
-                        .variable-label {
-                            color: #667eea;
-                            font-size: 18px;
-                            font-weight: bold;
-                            margin-bottom: 10px;
-                            border-bottom: 2px solid #f0f0f0;
-                            padding-bottom: 8px;
-                        }
+                    .variable-label {
+                      color: #667eea;
+                      font-size: 18px;
+                      font-weight: bold;
+                      margin-bottom: 10px;
+                      border-bottom: 2px solid #f0f0f0;
+                      padding-bottom: 8px;
+                    }
 
-                        .variable-name {
-                            color: #4a5568;
-                            font-size: 14px;
-                            margin-bottom: 8px;
-                        }
+                    .variable-name {
+                      color: #4a5568;
+                      font-size: 14px;
+                      margin-bottom: 8px;
+                    }
 
-                        .variable-desc {
-                            color: #666;
-                            font-size: 13px;
-                            line-height: 1.5;
-                        }
+                    .variable-desc {
+                      color: #666;
+                      font-size: 13px;
+                      line-height: 1.5;
+                    }
 
-                        .variable-name strong, .variable-desc strong {
-                            color: #2d3748;
-                            font-weight: 600;
-                        }
+                    .variable-name strong, .variable-desc strong {
+                      color: #2d3748;
+                      font-weight: 600;
+                    }
 
                 ")),
 
