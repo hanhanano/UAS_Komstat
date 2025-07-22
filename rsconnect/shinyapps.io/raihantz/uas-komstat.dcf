@@ -1,0 +1,12 @@
+name: uas-komstat
+title: uas-komstat
+username: raihantz
+account: raihantz
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15108875
+bundleId: 10655645
+url: https://raihantz.shinyapps.io/uas-komstat/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

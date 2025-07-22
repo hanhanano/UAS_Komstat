@@ -21,7 +21,7 @@ library(tseries)
 library(moments)
 library(boot)
 library(rsconnect)
-rsconnect::setAccountInfo(name='komstat-12', token='F0304BDDB9AE2B005EEC8D127CAC3DE5', secret='PcMly6f1VnMMO0jlAAXGicsoshAS8MELeFXoVwt0')
+rsconnect::setAccountInfo(name='raihantz', token='76911D6F934E1E4CFDE0C7F205B0D41F', secret='jaSuQSLVL95PIefVJ5ETs9Nk96jp5lcvVOS+of0d')
 #writeManifest() sekali aja dipanggil
 
 ui <- dashboardPage(
@@ -36,7 +36,9 @@ ui <- dashboardPage(
       menuItem("Statistik Inferensia", tabName = "inferensia", icon = icon("flask")),
       menuItem("Regresi Linear Berganda", tabName = "regresi", icon = icon("chart-line")),
       br(),
-      actionButton("printAllTabs", label = ("Cetak Semua Tab"))
+      actionButton("printAllTabs", label = ("Cetak Semua Tab")),
+      actionButton("printCurrentTab", "Cetak Tab Aktif")
+
     )
   ),
   dashboardBody(
@@ -66,7 +68,7 @@ ui <- dashboardPage(
         margin-left: 230px;
       }
 
-      #printAllTabs {
+      #printAllTabs, #printCurrentTab {
         background-color: #3F5973;
         color: #ecf0f1;
         border: none;
@@ -80,7 +82,9 @@ ui <- dashboardPage(
       }
 
       #printAllTabs:hover,
-      #printAllTabs:focus {
+      #printAllTabs:focus,
+      #printCurrentTab:hover ,
+      #printCurrentTab:focus {
         background-color: #16a085 !important;
         color: white !important;
         cursor: pointer;
@@ -128,11 +132,19 @@ ui <- dashboardPage(
 
       @media print {
         .tab-content > .tab-pane {
+          display: none !important;
+        }
+      }
+
+      @media print {
+        body.print-mode-all .tab-content > .tab-pane {
           display: block !important;
-          height: auto !important;
-          opacity: 1 !important;
-          visibility: visible !important;
-          position: relative !important;
+        }
+      }
+
+      @media print {
+        body.print-mode-active .tab-content > .tab-pane.active {
+          display: block !important;
         }
       }
 
@@ -298,11 +310,17 @@ ui <- dashboardPage(
     ),
 
     tags$script(HTML("
-      document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('printAllTabs').onclick = function() {
-          window.print();
-        };
-      });
+      document.getElementById('printAllTabs').onclick = function() {
+        document.body.classList.remove('print-mode-active');
+        document.body.classList.add('print-mode-all');
+        window.print();
+      };
+
+      document.getElementById('printCurrentTab').onclick = function() {
+        document.body.classList.remove('print-mode-all');
+        document.body.classList.add('print-mode-active');
+        window.print();
+      };
     ")),
 
     tabItems(
