@@ -21,11 +21,11 @@ library(tseries)
 library(moments)
 library(boot)
 library(rsconnect)
-  #rsconnect::setAccountInfo(
-    #name='Clear-IN',
-    #token='F0304BDDB9AE2B005EEC8D127CAC3DE5',
-    #secret='PcMly6f1VnMMO0jlAAXGicsoshAS8MELeFXoVwt0'
-  #)
+#rsconnect::setAccountInfo(
+#name='Clear-IN',
+#token='F0304BDDB9AE2B005EEC8D127CAC3DE5',
+#secret='PcMly6f1VnMMO0jlAAXGicsoshAS8MELeFXoVwt0'
+#)
 #writeManifest() sekali aja dipanggil
 
 ui <- dashboardPage(
@@ -40,14 +40,12 @@ ui <- dashboardPage(
       menuItem("Statistik Inferensia", tabName = "inferensia", icon = icon("flask")),
       menuItem("Regresi Linear Berganda", tabName = "regresi", icon = icon("chart-line")),
       br(),
-      actionButton("printAllTabs", label = ("Cetak Semua Tab")
-      )
+      actionButton("printAllTabs", label = ("Cetak Semua Tab"))
     )
   ),
   dashboardBody(
     tags$head(
       tags$style(HTML("
-      /* Base colors - elegant neutral palette */
       :root {
         --primary-color: #2c3e50;
         --secondary-color: #34495e;
@@ -93,13 +91,11 @@ ui <- dashboardPage(
         box-shadow: 0 2px 6px var(--white) !important;
       }
 
-      /* Main layout */
       .content-wrapper, .right-side {
         background-color: #BDDDFF;
         min-height: 100vh;
       }
 
-      /* Header and navigation */
       .main-header .navbar {
         background: var(--primary-color) !important;
         border-bottom: 1px solid var(--secondary-color);
@@ -113,7 +109,6 @@ ui <- dashboardPage(
         letter-spacing: 0.5px;
       }
 
-      /* Sidebar */
       .skin-blue .main-sidebar {
         background-color: var(--secondary-color) !important;
         box-shadow: 2px 0 8px var(--shadow-medium);
@@ -133,10 +128,8 @@ ui <- dashboardPage(
         flex: 1;
         display: flex;
         flex-direction: column;
-}
+      }
 
-
-      /* Full Download */
       @media print {
         .tab-content > .tab-pane {
           display: block !important;
@@ -144,6 +137,164 @@ ui <- dashboardPage(
           opacity: 1 !important;
           visibility: visible !important;
           position: relative !important;
+        }
+      }
+
+      .metadata-box {
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+
+      .metadata-box-header {
+        background: linear-gradient(135deg, #3c8dbc 0%, #367fa9 100%);
+        color: white;
+        padding: 15px 20px;
+        border-radius: 6px 6px 0 0;
+        border-bottom: 1px solid #367fa9;
+      }
+
+      .metadata-box-body {
+        padding: 20px;
+        background: #fff;
+      }
+
+      .metadata-title {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .svi-info-box {
+        display: block;
+        min-height: 90px;
+        background: #fff;
+        width: 100%;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        border-radius: 4px;
+        margin-bottom: 15px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .svi-info-box.bg-blue { border-left: 4px solid #3c8dbc; }
+      .svi-info-box.bg-green { border-left: 4px solid #00a65a; }
+      .svi-info-box.bg-yellow { border-left: 4px solid #f39c12; }
+      .svi-info-box.bg-red { border-left: 4px solid #dd4b39; }
+
+      .svi-info-box-icon {
+        display: inline-block;
+        width: 90px;
+        height: 90px;
+        line-height: 90px;
+        text-align: center;
+        font-size: 24px;
+        float: left;
+      }
+
+      .svi-info-box.bg-blue .svi-info-box-icon {
+        background: rgba(60,141,188,0.1);
+        color: #3c8dbc;
+      }
+      .svi-info-box.bg-green .svi-info-box-icon {
+        background: rgba(0,166,90,0.1);
+        color: #00a65a;
+      }
+      .svi-info-box.bg-yellow .svi-info-box-icon {
+        background: rgba(243,156,18,0.1);
+        color: #f39c12;
+      }
+      .svi-info-box.bg-red .svi-info-box-icon {
+        background: rgba(221,75,57,0.1);
+        color: #dd4b39;
+      }
+
+      .svi-info-box-content {
+        padding: 10px 15px;
+        margin-left: 90px;
+      }
+
+      .svi-info-box-text {
+        display: block;
+        font-size: 14px;
+        color: #777;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .svi-info-box-number {
+        display: block;
+        font-weight: bold;
+        font-size: 18px;
+        color: #333;
+        margin: 5px 0;
+      }
+
+      .svi-info-box-desc {
+        font-size: 12px;
+        color: #999;
+        line-height: 1.2;
+      }
+
+      .svi-progress-group {
+        margin-bottom: 15px;
+      }
+
+      .svi-progress-text {
+        font-weight: 500;
+        color: #333;
+      }
+
+      .svi-progress {
+        height: 8px;
+        background: #f4f4f4;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-top: 5px;
+      }
+
+      .svi-progress-bar {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.6s ease;
+      }
+
+      .svi-progress-bar.bg-green { background: #00a65a; }
+      .svi-progress-bar.bg-blue { background: #3c8dbc; }
+      .svi-progress-bar.bg-yellow { background: #f39c12; }
+
+      .svi-callout {
+        border-radius: 4px;
+        margin: 15px 0;
+        padding: 15px 20px;
+        border-left: 5px solid #eee;
+      }
+
+      .svi-callout.callout-info {
+        border-left-color: #3c8dbc;
+        background: rgba(60,141,188,0.05);
+      }
+
+      .svi-callout.callout-warning {
+        border-left-color: #f39c12;
+        background: rgba(243,156,18,0.05);
+      }
+
+      .svi-callout p {
+        margin: 0;
+        color: #555;
+      }
+
+      @media (max-width: 768px) {
+        .svi-info-box-icon {
+          width: 70px;
+          height: 70px;
+          line-height: 70px;
+          font-size: 20px;
+        }
+        .svi-info-box-content {
+          margin-left: 70px;
         }
       }
 
@@ -224,21 +375,99 @@ ui <- dashboardPage(
               ),
               tags$style(HTML("
                     .stat-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 6px 25px rgba(0,0,0,0.15) !important;
+                      transform: translateY(-5px);
+                      box-shadow: 0 6px 25px rgba(0,0,0,0.15) !important;
                     }
-                ")),
 
-              br(),
-              fluidRow(
-                column(12,
-                       tags$style(HTML("
-                        .metadata-container {
+                    .box {
+                      background: white !important;
+                      border-radius: 8px !important;
+                      padding: 25px;
+                      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+                      border-top: 4px solid #3498db !important;
+                      transition: transform 0.2s ease-in-out;
+                    }
+
+                    .box:hover {
+                      transform: translateY(-3px);
+                    }
+
+                    .box-primary > .box-header {
+                      background-color: #3498db !important;
+                      color: white !important;
+                      border-radius: 6px 6px 0 0 !important;
+                    }
+
+                    .box-title {
+                      font-weight: bold;
+                      font-size: 18px;
+                    }
+
+                    .callout.callout-info {
+                      background-color: #ecf6fc;
+                      border-left-color: #3498db;
+                      border-radius: 6px;
+                    }
+
+                    .callout.callout-warning {
+                      background-color: #fff7e6;
+                      border-left-color: #f39c12;
+                      border-radius: 6px;
+                    }
+
+                    .info-box {
+                      border-radius: 8px;
+                      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+                      transition: 0.2s;
+                    }
+
+                    .info-box:hover {
+                      transform: scale(1.02);
+                    }
+
+                    .info-box-icon {
+                      border-radius: 8px 0 0 8px !important;
+                    }
+
+                    .progress-group .progress-bar {
+                      border-radius: 6px;
+                    }
+
+                    .progress-group {
+                      margin-bottom: 15px;
+                    }
+
+                    .dataTables_wrapper {
+                      padding-top: 10px;
+                    }
+
+                    .box-header.custom-header {
+                      background: linear-gradient(to right, #5dade2, #3498db);
+                      border-top-left-radius: 10px;
+                      border-top-right-radius: 10px;
+                      padding: 10px 15px;
+                      color: #fff !important;
+                      font-weight: bold;
+                      font-size: 16px;
+                      border-bottom: none;
+                    }
+
+                    .box-header.custom-header .fa,
+                    .box-header.custom-header .glyphicon {
+                      color: white !important;
+                    }
+
+                    .box.box-solid > .box-header {
+                      border-bottom: none !important;
+                    }
+
+                    .metadata-container {
                             background: white;
                             border-radius: 15px;
                             padding: 30px;
                             margin-bottom: 20px;
                             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                            border-top: 4px solid #17a2b8;
                         }
 
                         .metadata-title {
@@ -290,10 +519,66 @@ ui <- dashboardPage(
                             color: #2d3748;
                             font-weight: 600;
                         }
-                        ")),
 
+                ")),
+
+              br(),
+              fluidRow(
+                column(12,
                        div(class = "metadata-container",
                            h3("Metadata Variabel Dataset", class = "metadata-title"),
+                           fluidRow(
+                             column(12,
+                                    div(class = "box-body",
+                                        p(strong("Sumber: "), "SUSENAS 2017 - Badan Pusat Statistik Indonesia"),
+                                        p(strong("Publikasi: "), "Revisiting social vulnerability analysis in Indonesia data (2021)"),
+                                        p(strong("DOI: "), tags$code("S2352340921010180")),
+                                        br(),
+                                    )
+                             )
+                           ),
+                           fluidRow(
+                             column(6,
+                                    box(title = tagList(icon("book"), "Metadata Referensi"),
+                                        status = "success", solidHeader = FALSE, width = 12, collapsible = TRUE, collapsed = TRUE,
+
+                                        h4("Sumber dan Metodologi"),
+                                        tags$ul(
+                                          tags$li(strong("Survei: "), "SUSENAS (Survei Sosial Ekonomi Nasional) 2017"),
+                                          tags$li(strong("Institusi: "), "Badan Pusat Statistik (BPS) Indonesia"),
+                                          tags$li(strong("Cakupan: "), "Seluruh kabupaten/kota di Indonesia"),
+                                          tags$li(strong("Metodologi: "), "Survei nasional representatif")
+                                        ),
+                                        br(),
+                                        h4("Keterbatasan"),
+                                        tags$div(class = "callout callout-warning",
+                                                 tags$ul(
+                                                   tags$li("Data snapshot tahun 2017"),
+                                                   tags$li("Agregasi level kabupaten/kota"),
+                                                   tags$li("Tidak menangkap dinamika temporal")
+                                                 )
+                                        )
+                                    )
+                             ),
+                             column(6,
+                                    box(title = tagList(icon("table"), "Metadata Struktural"),
+                                        status = "success", solidHeader = FALSE, width = 12, collapsible = TRUE, collapsed = TRUE,
+
+                                        h4("Informasi Umum Dataset"),
+                                        tags$ul(
+                                          tags$li(strong("Nama Dataset: "), "Social Vulnerability Analysis Indonesia Dataset"),
+                                          tags$li(strong("Tahun Data: "), "2017"),
+                                          tags$li(strong("Unit Observasi: "), "Kabupaten/Kota (District Level)"),
+                                          tags$li(strong("Jumlah Variabel: "), "16 variabel"),
+                                          tags$li(strong("Primary Key: "), tags$code("DISTRICTCODE"))
+                                        ),
+
+                                        br(),
+                                        h4("Struktur Variabel"),
+                                        DT::dataTableOutput("variable_structure"),
+                                    )
+                             )
+                           ),
                            fluidRow(
                              column(4,
                                     div(class = "variable-card",
@@ -461,7 +746,7 @@ ui <- dashboardPage(
 
                                div(class = "feature-item",
                                    style = "margin-bottom: 20px; padding: 15px; background: #fdf2f2; border-radius: 6px; border-left: 4px solid #e74c3c;",
-                                   h5(icon("check-circle"), " Uji Asumsi Statistik",
+                                   h5(icon("flask"), " Uji Asumsi Data",
                                       style = "color: #2c3e50; font-weight: 600; margin-bottom: 8px;"),
                                    p("Pengujian normalitas dan homogenitas dengan interpretasi otomatis hasil uji.",
                                      style = "margin: 0; color: #5a6c7d;")
@@ -572,18 +857,6 @@ ui <- dashboardPage(
                        )
                 )
               ),
-              fluidRow(
-                column(12,
-                       div(class = "footer-section",
-                           style = "background: white; padding: 20px; border-radius: 8px;
-                                    text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-                                    border-top: 3px solid #3498db; margin-top: 20px;",
-                           p(style = "color: #7f8c8d; font-size: 14px; margin: 0;",
-                             icon("info-circle"), " Dashboard ini dikembangkan untuk memudahkan analisis statistik dengan pendekatan yang robust dan reliable."
-                           )
-                       )
-                )
-              )
       ),
       tabItem(tabName = "manajemen",
               fluidRow(
@@ -726,7 +999,6 @@ ui <- dashboardPage(
                     box-shadow: 0 6px 20px rgba(0,0,0,0.12) !important;
                     }
 
-                    /* Additional margin fixes */
                     .row {
                     margin-left: -15px;
                     margin-right: -15px;
@@ -737,7 +1009,6 @@ ui <- dashboardPage(
                     padding-right: 15px;
                     }
 
-                    /* Responsive margin adjustments */
                     @media (max-width: 768px) {
                     .upload-card {
                         margin-bottom: 20px !important;
@@ -777,7 +1048,8 @@ ui <- dashboardPage(
                                              "Akar Kuadrat (√)" = "sqrt",
                                              "Kuadrat (x²)" = "square",
                                              "Standardisasi (Z-score)" = "standardize",
-                                             "Invers (1/x)" = "inverse"
+                                             "Invers (1/x)" = "inverse",
+                                             "lag (nonautokorelasi)" = "lag"
                                            ),
                                            width = "100%"
                                )
@@ -2135,8 +2407,8 @@ server <- function(input, output, session) {
     processedData = NULL,
     transformedVars = list(),
     categorizedVars = list(),
-    mdsData = NULL,            # Data hasil MDS
-    geoData = NULL             # Data GeoJSON
+    mdsData = NULL,
+    geoData = NULL
   )
   observeEvent(input$file, {
     req(input$file)
@@ -2147,7 +2419,7 @@ server <- function(input, output, session) {
                      sep = input$sep,
                      stringsAsFactors = FALSE)
 
-      df$DISTRICTCODE <- as.character(df$DISTRICTCODE)  # Pastikan character
+      df$DISTRICTCODE <- as.character(df$DISTRICTCODE)
       df$KODE_JOIN <- paste0(substr(df$DISTRICTCODE, 1, 2), ".", substr(df$DISTRICTCODE, 3, 4))
 
       values$originalData <- df
@@ -2208,7 +2480,7 @@ server <- function(input, output, session) {
     current_vars <- names(values$processedData)
     checkboxGroupInput("selectedVars", "Pilih variabel yang akan digunakan:",
                        choices = current_vars,
-                       selected = current_vars) # Select all current variables by default
+                       selected = current_vars)
   })
   output$transformSelectUI <- renderUI({
     req(values$processedData)
@@ -2216,12 +2488,12 @@ server <- function(input, output, session) {
     if(length(numeric_vars) == 0) return(NULL)
     current_selection <- isolate(input$varTransform)
     if (is.null(current_selection) || !(current_selection %in% numeric_vars)) {
-      current_selection <- numeric_vars[1] # Default to first if no valid selection
+      current_selection <- numeric_vars[1]
     }
 
     selectInput("varTransform", "Pilih variabel numerik untuk transformasi:",
                 choices = numeric_vars,
-                selected = current_selection) # Set selected value
+                selected = current_selection)
   })
   output$categVarSelect <- renderUI({
     req(values$processedData)
@@ -2262,13 +2534,14 @@ server <- function(input, output, session) {
                                "sqrt" = sqrt(var_data),
                                "square" = var_data^2,
                                "standardize" = as.numeric(scale(var_data)),
-                               "inverse" = 1/var_data
+                               "inverse" = 1/var_data,
+                               "lag" = c(NA, diff(var_data))
     )
 
     new_var_name <- paste0(var_name, "_", input$transformType)
     temp_processed_data <- values$processedData
     temp_processed_data[[new_var_name]] <- transformed_data
-    values$processedData <- temp_processed_data # This reassignment forces reactivity
+    values$processedData <- temp_processed_data
 
     updateCheckboxGroupInput(session, "selectedVars",
                              choices = names(values$processedData),
@@ -2302,7 +2575,7 @@ server <- function(input, output, session) {
 
     if(input$categMethod == "quantile") {
       breaks <- quantile(var_data, probs = seq(0, 1, length.out = input$numCategories + 1), na.rm = TRUE)
-      breaks <- unique(breaks) # Pastikan break points unik
+      breaks <- unique(breaks)
       if(length(breaks) < input$numCategories + 1) {
         showNotification("Tidak bisa membuat kategori unik. Coba metode lain atau kurangi jumlah kategori.", type = "error")
         return()
@@ -2323,7 +2596,7 @@ server <- function(input, output, session) {
     new_var_name <- paste0(var_name, "_kategori")
     temp_processed_data <- values$processedData
     temp_processed_data[[new_var_name]] <- categorized_data
-    values$processedData <- temp_processed_data # This reassignment forces reactivity
+    values$processedData <- temp_processed_data
 
     updateCheckboxGroupInput(session, "selectedVars",
                              choices = names(values$processedData),
@@ -2346,7 +2619,7 @@ server <- function(input, output, session) {
     showNotification("Kategorisasi berhasil diterapkan!", type = "message")
   })
   output$processedDataTable <- renderDT({
-    req(values$processedData, input$selectedVars) # Ensure selectedVars is available
+    req(values$processedData, input$selectedVars)
     filtered_data <- values$processedData %>%
       select(all_of(input$selectedVars))
 
@@ -2363,7 +2636,7 @@ server <- function(input, output, session) {
       paste("processed_data_", Sys.Date(), ".csv", sep = "")
     },
     content = function(file) {
-      req(input$selectedVars) # Ensure selectedVars is available
+      req(input$selectedVars)
       download_data <- values$processedData %>%
         select(all_of(input$selectedVars))
       write.csv(download_data, file, row.names = FALSE)
@@ -2386,7 +2659,7 @@ server <- function(input, output, session) {
   })
 
   output$descTable <- renderDT({
-    req(input$descVars) # Ensure numeric variables are selected
+    req(input$descVars)
 
     df <- values$processedData
 
@@ -2408,7 +2681,7 @@ server <- function(input, output, session) {
         select(Variable, N, Missing, Mean, Median, SD, Min, Max)
 
     } else {
-      req(input$descGroupVar) # Ensure grouping variable is selected
+      req(input$descGroupVar)
       df[[input$descGroupVar]] <- as.factor(df[[input$descGroupVar]])
       df <- df[!is.na(df[[input$descGroupVar]]), ]
       numeric_vars_to_summarise <- intersect(input$descVars, names(df)[sapply(df, is.numeric)])
@@ -2420,7 +2693,7 @@ server <- function(input, output, session) {
 
       desc_stats <- df %>%
         group_by(!!sym(input$descGroupVar)) %>%
-        summarise(across(all_of(numeric_vars_to_summarise), # Use the filtered list of numeric vars
+        summarise(across(all_of(numeric_vars_to_summarise),
                          list(Mean = ~mean(., na.rm = TRUE),
                               Median = ~median(., na.rm = TRUE),
                               SD = ~sd(., na.rm = TRUE),
@@ -2430,8 +2703,8 @@ server <- function(input, output, session) {
                               Missing = ~sum(is.na(.))), .names = "{.col}_{.fn}"), .groups = "drop")
       desc_long <- desc_stats %>%
         pivot_longer(cols = -!!sym(input$descGroupVar), names_to = "Variable_Stat", values_to = "Value") %>%
-        mutate(Value = as.numeric(Value)) %>% # Ensure numeric type
-        separate(Variable_Stat, c("Variable", "Statistic"), sep = "_", extra = "merge") %>% # Use extra = "merge" for safety
+        mutate(Value = as.numeric(Value)) %>%
+        separate(Variable_Stat, c("Variable", "Statistic"), sep = "_", extra = "merge") %>%
         pivot_wider(names_from = Statistic, values_from = Value) %>%
         mutate(Variable = as.character(Variable)) %>%
         select(!!sym(input$descGroupVar), Variable, N, Missing, Mean, Median, SD, Min, Max)
@@ -2519,7 +2792,7 @@ server <- function(input, output, session) {
     } else if(input$plotType == "bar") {
       req(input$barGroupVar)
       df[[input$barGroupVar]] <- as.factor(df[[input$barGroupVar]])
-      df <- df[!is.na(df[[input$barGroupVar]]), ] # Remove NAs from grouping variable
+      df <- df[!is.na(df[[input$barGroupVar]]), ]
 
       summary_df <- df %>%
         group_by(!!sym(input$barGroupVar)) %>%
@@ -2571,7 +2844,7 @@ server <- function(input, output, session) {
     req(input$normVar, input$normTestType)
 
     data <- values$processedData[[input$normVar]]
-    data <- data[!is.na(data) & is.finite(data)] # Handle infinite values
+    data <- data[!is.na(data) & is.finite(data)]
 
     if(length(data) < 3) {
       cat("Error: Data terlalu kecil untuk uji normalitas (n < 3)\n")
@@ -2588,7 +2861,7 @@ server <- function(input, output, session) {
 
     if(input$normTestType == "shapiro") {
       if(length(data) > 5000) {
-        set.seed(123) # For reproducible sampling
+        set.seed(123)
         data_sample <- sample(data, 5000)
         cat("Catatan: Data lebih dari 5000 observasi, menggunakan sample 5000\n\n")
         result <- shapiro.test(data_sample)
@@ -2694,7 +2967,7 @@ server <- function(input, output, session) {
     categ_vars <- names(values$processedData)[sapply(values$processedData, function(x) {
       if(is.factor(x) || is.character(x)) {
         unique_vals <- unique(x[!is.na(x)])
-        return(length(unique_vals) >= 2 && length(unique_vals) <= 20) # Max 20 groups for practical purposes
+        return(length(unique_vals) >= 2 && length(unique_vals) <= 20)
       }
       return(FALSE)
     })]
@@ -2841,7 +3114,6 @@ server <- function(input, output, session) {
              xaxt = "n")
         axis(1, at = 1:length(means), labels = groups_names)
 
-        # Add error bars only if SD > 0
         valid_sds <- sds > 0 & is.finite(sds)
         if(any(valid_sds)) {
           arrows(which(valid_sds), means[valid_sds] - sds[valid_sds],
@@ -3154,7 +3426,7 @@ server <- function(input, output, session) {
 
     tryCatch({
       data <- values$processedData[[input$jackknifeVar]]
-      data <- data[!is.na(data)]  # Remove NA values
+      data <- data[!is.na(data)]
       n <- length(data)
       if(n < 3) {
         showNotification("Data terlalu kecil untuk jackknife (minimal n = 3)", type = "error")
@@ -3430,7 +3702,7 @@ server <- function(input, output, session) {
       output$bootstrapInterpretation <- renderText({
         bias <- mean(boot_stats) - boot_results$t0
         se <- sd(boot_stats)
-        cv <- abs(se / boot_results$t0) * 100  # Coefficient of variation
+        cv <- abs(se / boot_results$t0) * 100
 
         interpretation <- paste(
           "Bootstrap dengan", input$bootstrapR, "replikasi menunjukkan distribusi sampling statistik.",
@@ -3480,7 +3752,7 @@ server <- function(input, output, session) {
     categ_vars <- names(values$processedData)[sapply(values$processedData, function(x) {
       if(is.factor(x) || is.character(x)) {
         unique_vals <- length(unique(x[!is.na(x)]))
-        return(unique_vals >= 2 && unique_vals <= 10)  # Reasonable number of groups
+        return(unique_vals >= 2 && unique_vals <= 10)
       }
       return(FALSE)
     })]
@@ -3664,7 +3936,6 @@ server <- function(input, output, session) {
                                   formatC(p_value_f, digits = 3, format = "f"), ").")
         }
 
-        # Add effect size interpretation
         if(eta_squared >= 0.14) {
           interpretation <- paste(interpretation, "Effect size sangat besar (η² =",
                                   formatC(eta_squared, digits = 3, format = "f"), "), perbedaan praktis sangat meaningful.")
@@ -3679,12 +3950,10 @@ server <- function(input, output, session) {
                                   formatC(eta_squared, digits = 3, format = "f"), "), perbedaan praktis minimal.")
         }
 
-        # Add reliability note
         if(input$permutationR < 1000) {
           interpretation <- paste(interpretation, "Catatan: Gunakan ≥1000 permutasi untuk p-value yang lebih stabil.")
         }
 
-        # Add assumption check
         group_vars <- tapply(df[[input$permutationVar]], df[[input$permutationGroup]], var, na.rm = TRUE)
         if(max(group_vars, na.rm = TRUE) / min(group_vars, na.rm = TRUE) > 4) {
           interpretation <- paste(interpretation, "Perhatian: Variance antar grup cukup berbeda, pertimbangkan transformasi data.")
@@ -4570,7 +4839,7 @@ server <- function(input, output, session) {
               interaction_rows <- rownames(anova_summary)[grep(":", rownames(anova_summary))]
 
               if(length(interaction_rows) > 0) {
-                interaction_row <- interaction_rows[1]  # ambil yang pertama
+                interaction_row <- interaction_rows[1]
                 p_interaction <- anova_summary[interaction_row, "Pr(>F)"]
                 f_interaction <- anova_summary[interaction_row, "F value"]
 
@@ -4749,12 +5018,14 @@ server <- function(input, output, session) {
     model <- mlr_model()
     residuals <- residuals(model)
 
-    cat("=== UJI NORMALITAS RESIDUAL (SHAPIRO-WILK) ===\n\n")
+    cat("=== UJI NORMALITAS RESIDUAL ===\n\n")
 
     shapiro_test <- shapiro.test(residuals)
+    kolmogorov_smirnov_test <- ks.test(residuals, "pnorm", mean = mean(residuals), sd = sd(residuals))
+
     print(shapiro_test)
 
-    cat("\nINTERPRETASI:\n")
+    cat("\nINTERPRETASI (shapiro-wilk):\n")
     if(shapiro_test$p.value > 0.05) {
       cat("P-value (", round(shapiro_test$p.value, 4), ") > 0.05\n")
       cat("KESIMPULAN: Residual berdistribusi normal (asumsi normalitas TERPENUHI)\n")
@@ -4763,7 +5034,20 @@ server <- function(input, output, session) {
       cat("KESIMPULAN: Residual TIDAK berdistribusi normal (asumsi normalitas TIDAK TERPENUHI)\n")
       cat("SARAN: Pertimbangkan transformasi data atau gunakan metode non-parametrik\n")
     }
+
+    print(kolmogorov_smirnov_test)
+
+    cat("\nINTERPRETASI (kolmogorov-smirnov):\n")
+    if(kolmogorov_smirnov_test$p.value > 0.05) {
+      cat("P-value (", round(kolmogorov_smirnov_test$p.value, 4), ") > 0.05\n")
+      cat("KESIMPULAN: Residual berdistribusi normal (asumsi normalitas TERPENUHI)\n")
+    } else {
+      cat("P-value (", round(kolmogorov_smirnov_test$p.value, 4), ") ≤ 0.05\n")
+      cat("KESIMPULAN: Residual TIDAK berdistribusi normal (asumsi normalitas TIDAK TERPENUHI)\n")
+      cat("SARAN: Pertimbangkan transformasi data atau gunakan metode non-parametrik\n")
+    }
   })
+
   output$uji_multikolinearitas <- renderPrint({
     if(!mlr_results$run_analysis) {
       cat("Jalankan analisis regresi terlebih dahulu untuk melihat uji multikolinearitas.\n")
@@ -4851,31 +5135,75 @@ server <- function(input, output, session) {
     cat("=== UJI AUTOKORELASI (DURBIN-WATSON) ===\n\n")
 
     tryCatch({
-      library(lmtest)
-      dw_test <- dwtest(mlr_model())
+      if(!requireNamespace("lmtest", quietly = TRUE)) {
+        cat("Package 'lmtest' tidak ditemukan.\n")
+        cat("Install dengan: install.packages('lmtest')\n")
+        return()
+      }
+
+      dw_test <- na.omit(dwtest(mlr_model()))
+
       print(dw_test)
 
-      cat("\nINTERPRETASI:\n")
+      cat("\n=== INTERPRETASI ===\n")
       dw_stat <- dw_test$statistic
+      p_value <- dw_test$p.value
+
       cat("Nilai Durbin-Watson:", round(dw_stat, 4), "\n")
+      cat("P-value:", round(p_value, 4), "\n\n")
 
+      cat("INTERPRETASI NILAI DURBIN-WATSON:\n")
       if(dw_stat >= 1.5 && dw_stat <= 2.5) {
-        cat("KESIMPULAN: Tidak ada autokorelasi (asumsi independensi TERPENUHI)\n")
+        cat("✓ Tidak ada autokorelasi (asumsi independensi TERPENUHI)\n")
+        status <- "BAIK"
       } else if(dw_stat < 1.5) {
-        cat("KESIMPULAN: Terdapat autokorelasi positif (asumsi independensi TIDAK TERPENUHI)\n")
-        cat("SARAN: Pertimbangkan menambah lag variables atau gunakan model time series\n")
+        cat("✗ Terdapat autokorelasi positif (asumsi independensi TIDAK TERPENUHI)\n")
+        status <- "BERMASALAH"
       } else {
-        cat("KESIMPULAN: Terdapat autokorelasi negatif (asumsi independensi TIDAK TERPENUHI)\n")
-        cat("SARAN: Periksa model spesifikasi atau gunakan metode koreksi\n")
+        cat("✗ Terdapat autokorelasi negatif (asumsi independensi TIDAK TERPENUHI)\n")
+        status <- "BERMASALAH"
       }
 
-      if(dw_test$p.value <= 0.05) {
-        cat("P-value (", round(dw_test$p.value, 4), ") ≤ 0.05: Autokorelasi signifikan secara statistik\n")
+      cat("\nINTERPRETASI P-VALUE:\n")
+      if(p_value <= 0.05) {
+        cat("✗ P-value (", round(p_value, 4), ") ≤ 0.05: Ada bukti autokorelasi yang signifikan\n")
+      } else {
+        cat("✓ P-value (", round(p_value, 4), ") > 0.05: Tidak ada bukti autokorelasi yang signifikan\n")
       }
+
+      cat("\n=== KESIMPULAN KESELURUHAN ===\n")
+      if(p_value > 0.05) {
+        cat("✅ ASUMSI INDEPENDENSI TERPENUHI - Model dapat dilanjutkan\n")
+        cat("    (Tidak ada bukti autokorelasi yang signifikan secara statistik)\n")
+      } else {
+        cat("⚠️  ASUMSI INDEPENDENSI TIDAK TERPENUHI\n")
+        cat("    (Ada bukti autokorelasi yang signifikan secara statistik)\n")
+        cat("\nSARAN PERBAIKAN:\n")
+        if(dw_stat < 2) {
+          cat("• Autokorelasi positif terdeteksi:\n")
+        } else {
+          cat("• Autokorelasi negatif terdeteksi:\n")
+        }
+        cat("  - Periksa urutan data (pastikan data time series diurutkan dengan benar)\n")
+        cat("  - Pertimbangkan menambahkan lag variables\n")
+        cat("  - Gunakan model ARIMA atau time series lainnya\n")
+        cat("  - Transformasi data atau penambahan variabel kontrol\n")
+        cat("  - Pertimbangkan menggunakan Generalized Least Squares (GLS)\n")
+      }
+
+      cat("\nCATATAN:\n")
+      cat("• Nilai Durbin-Watson berkisar 0-4\n")
+      cat("• Nilai ~2 menunjukkan tidak ada autokorelasi\n")
+      cat("• Nilai <2 menunjukkan autokorelasi positif\n")
+      cat("• Nilai >2 menunjukkan autokorelasi negatif\n")
 
     }, error = function(e) {
-      cat("Error dalam uji Durbin-Watson. Pastikan package 'lmtest' terinstall.\n")
-      cat("Install dengan: install.packages('lmtest')\n")
+      cat("ERROR: Gagal menjalankan uji Durbin-Watson\n")
+      cat("Pesan error:", e$message, "\n\n")
+      cat("TROUBLESHOOTING:\n")
+      cat("1. Pastikan package 'lmtest' terinstall: install.packages('lmtest')\n")
+      cat("2. Pastikan model regresi valid\n")
+      cat("3. Periksa apakah data mengandung missing values\n")
     })
   })
   output$plot_diagnostik <- renderPlot({
@@ -5296,7 +5624,7 @@ server <- function(input, output, session) {
     content = function(file) {
       req(input$homogenVarsMulti, input$homogenTestTypeMulti)
 
-      alpha <- 0.05  # You can make this dynamic from UI if needed
+      alpha <- 0.05
 
       content <- capture_output({
         cat("=== UJI HOMOGENITAS ANTAR VARIABEL ===\n")
@@ -5480,8 +5808,6 @@ server <- function(input, output, session) {
             cat("Bias estimasi cukup besar, pertimbangkan koreksi bias\n")
           }
         }
-
-        # Add similar logic for other statistics (variance, median, etc.)
       })
 
       temp_file <- create_professional_docx("ANALISIS JACKKNIFE RESAMPLING", content, file, alpha)
@@ -5497,7 +5823,7 @@ server <- function(input, output, session) {
       req(input$bootstrapVar, input$bootstrapStatistic)
 
       alpha <- 0.05
-      n_bootstrap <- 1000  # You can make this dynamic from UI
+      n_bootstrap <- 1000
 
       content <- capture_output({
         cat("=== BOOTSTRAP RESAMPLING ANALYSIS ===\n")
@@ -5513,7 +5839,7 @@ server <- function(input, output, session) {
         cat("Jumlah observasi:", n, "\n")
         cat("Mean asli:", round(mean(data), 4), "\n")
         cat("SD asli:", round(sd(data), 4), "\n\n")
-        set.seed(123)  # For reproducibility
+        set.seed(123)
         if(input$bootstrapStatistic == "mean") {
           bootstrap_stats <- replicate(n_bootstrap, {
             boot_sample <- sample(data, n, replace = TRUE)
@@ -5573,7 +5899,7 @@ server <- function(input, output, session) {
       req(input$permutationVar, input$permutationGroup)
 
       alpha <- 0.05
-      n_permutations <- 1000  # You can make this dynamic from UI
+      n_permutations <- 1000
 
       content <- capture_output({
         cat("=== PERMUTATION TEST ANALYSIS ===\n")
@@ -5646,7 +5972,7 @@ server <- function(input, output, session) {
         original_diff <- mean(group1_data) - mean(group2_data)
         cat("Perbedaan mean asli:", round(original_diff, 4), "\n\n")
         cat("=== MELAKUKAN PERMUTATION TEST ===\n")
-        set.seed(123)  # For reproducibility
+        set.seed(123)
         all_data <- c(group1_data, group2_data)
         n1 <- length(group1_data)
         n2 <- length(group2_data)
@@ -6000,7 +6326,7 @@ server <- function(input, output, session) {
           cat("Multikolinearitas terjadi ketika terdapat korelasi tinggi antar variabel independen.\n")
           cat("Hal ini dapat menyebabkan ketidakstabilan estimasi koefisien dan interpretasi yang\n")
           cat("menyesatkan dalam analisis regresi.\n\n")
-          if(length(coef(model)) > 2) {  # More than just intercept + 1 variable
+          if(length(coef(model)) > 2) {
             vif_values <- car::vif(model)
 
             cat("HASIL VARIANCE INFLATION FACTOR (VIF):\n")
@@ -6352,6 +6678,61 @@ server <- function(input, output, session) {
       file.copy(temp_file, file, overwrite = TRUE)
     }
   )
+
+  output$variable_structure <- DT::renderDataTable({
+    structure_data <- data.frame(
+      Variable = c("DISTRICTCODE", "CHILDREN", "FEMALE", "ELDERLY", "FHEAD", "FAMILYSIZE",
+                   "NOELECTRIC", "LOWEDU", "GROWTH", "POVERTY", "ILLITERATE", "NOTRAINING",
+                   "DPRONE", "RENTED", "NOSEWER", "TAPWATER", "POPULATION"),
+      Type = c("String", rep("Numeric", 15), "Numeric"),
+      Format = c("Text", rep("Percentage", 14), "Ratio", "Count"),
+      Unit = c("Code", rep("%", 14), "Persons", "Persons"),
+      stringsAsFactors = FALSE
+    )
+
+    DT::datatable(structure_data,
+                  options = list(pageLength = 10, scrollX = TRUE),
+                  rownames = FALSE) %>%
+      DT::formatStyle(columns = "Type",
+                      backgroundColor = DT::styleEqual("String", "#e6f3ff"))
+  }, server = FALSE)
+
+  output$variable_definitions <- DT::renderDataTable({
+    definitions_data <- data.frame(
+      Label = c("DISTRICTCODE", "CHILDREN", "FEMALE", "ELDERLY", "FHEAD", "FAMILYSIZE",
+                "NOELECTRIC", "LOWEDU", "GROWTH", "POVERTY", "ILLITERATE", "NOTRAINING",
+                "DPRONE", "RENTED", "NOSEWER", "TAPWATER", "POPULATION"),
+      Variable = c("District Code", "Children", "Female", "Elderly", "Female household",
+                   "Household members", "Non-electric household", "Low education",
+                   "Population growth", "Poverty", "Illiteracy", "Training",
+                   "Disaster prone", "Homeownership", "Drainage", "Water source", "Population"),
+      Description = c("Kode kabupaten/kota",
+                      "Persentase populasi usia di bawah 5 tahun",
+                      "Persentase populasi perempuan",
+                      "Persentase populasi usia 65 tahun ke atas",
+                      "Persentase rumah tangga dengan kepala rumah tangga perempuan",
+                      "Rata-rata jumlah anggota rumah tangga per kabupaten",
+                      "Persentase rumah tangga tanpa listrik sebagai sumber penerangan",
+                      "Persentase penduduk usia 15+ dengan pendidikan rendah",
+                      "Persentase perubahan populasi",
+                      "Persentase penduduk miskin",
+                      "Persentase populasi yang tidak bisa membaca dan menulis",
+                      "Persentase rumah tangga yang tidak mendapat pelatihan bencana",
+                      "Persentase rumah tangga di daerah rawan bencana",
+                      "Persentase rumah tangga yang menyewa rumah",
+                      "Persentase rumah tangga tanpa sistem drainase",
+                      "Persentase rumah tangga yang menggunakan air ledeng",
+                      "Jumlah total populasi"),
+      stringsAsFactors = FALSE
+    )
+
+    DT::datatable(definitions_data,
+                  options = list(pageLength = 17, scrollX = TRUE),
+                  rownames = FALSE) %>%
+      DT::formatStyle(columns = "Label",
+                      backgroundColor = "#f9f9f9",
+                      fontWeight = "bold")
+  }, server = FALSE)
 
 
 }
