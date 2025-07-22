@@ -79,6 +79,7 @@ ui <- dashboardPage(
         box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         transition: background-color 0.3s ease;
         margin: 15px 0 15px 15px;
+        width: 80%
       }
 
       #printAllTabs:hover,
@@ -172,126 +173,6 @@ ui <- dashboardPage(
         margin: 0;
         font-size: 18px;
         font-weight: 600;
-      }
-
-      .svi-info-box {
-        display: block;
-        min-height: 90px;
-        background: #fff;
-        width: 100%;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-        border-radius: 4px;
-        margin-bottom: 15px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .svi-info-box.bg-blue { border-left: 4px solid #3c8dbc; }
-      .svi-info-box.bg-green { border-left: 4px solid #00a65a; }
-      .svi-info-box.bg-yellow { border-left: 4px solid #f39c12; }
-      .svi-info-box.bg-red { border-left: 4px solid #dd4b39; }
-
-      .svi-info-box-icon {
-        display: inline-block;
-        width: 90px;
-        height: 90px;
-        line-height: 90px;
-        text-align: center;
-        font-size: 24px;
-        float: left;
-      }
-
-      .svi-info-box.bg-blue .svi-info-box-icon {
-        background: rgba(60,141,188,0.1);
-        color: #3c8dbc;
-      }
-      .svi-info-box.bg-green .svi-info-box-icon {
-        background: rgba(0,166,90,0.1);
-        color: #00a65a;
-      }
-      .svi-info-box.bg-yellow .svi-info-box-icon {
-        background: rgba(243,156,18,0.1);
-        color: #f39c12;
-      }
-      .svi-info-box.bg-red .svi-info-box-icon {
-        background: rgba(221,75,57,0.1);
-        color: #dd4b39;
-      }
-
-      .svi-info-box-content {
-        padding: 10px 15px;
-        margin-left: 90px;
-      }
-
-      .svi-info-box-text {
-        display: block;
-        font-size: 14px;
-        color: #777;
-        text-transform: uppercase;
-        font-weight: 500;
-      }
-
-      .svi-info-box-number {
-        display: block;
-        font-weight: bold;
-        font-size: 18px;
-        color: #333;
-        margin: 5px 0;
-      }
-
-      .svi-info-box-desc {
-        font-size: 12px;
-        color: #999;
-        line-height: 1.2;
-      }
-
-      .svi-progress-group {
-        margin-bottom: 15px;
-      }
-
-      .svi-progress-text {
-        font-weight: 500;
-        color: #333;
-      }
-
-      .svi-progress {
-        height: 8px;
-        background: #f4f4f4;
-        border-radius: 4px;
-        overflow: hidden;
-        margin-top: 5px;
-      }
-
-      .svi-progress-bar {
-        height: 100%;
-        border-radius: 4px;
-        transition: width 0.6s ease;
-      }
-
-      .svi-progress-bar.bg-green { background: #00a65a; }
-      .svi-progress-bar.bg-blue { background: #3c8dbc; }
-      .svi-progress-bar.bg-yellow { background: #f39c12; }
-
-      .svi-callout {
-        border-radius: 4px;
-        margin: 15px 0;
-        padding: 15px 20px;
-        border-left: 5px solid #eee;
-      }
-
-      .svi-callout.callout-info {
-        border-left-color: #3c8dbc;
-        background: rgba(60,141,188,0.05);
-      }
-
-      .svi-callout.callout-warning {
-        border-left-color: #f39c12;
-        background: rgba(243,156,18,0.05);
-      }
-
-      .svi-callout p {
-        margin: 0;
-        color: #555;
       }
 
       @media (max-width: 768px) {
